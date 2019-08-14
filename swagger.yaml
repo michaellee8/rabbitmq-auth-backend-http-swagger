@@ -11,14 +11,15 @@ produces:
 consumes:
   - application/x-www-form-urlencoded
 tags:
-- name: user
-  description: APIs to be implemented in user_path, default /rabbitmq/user
-- name: vhost
-  description: APIs to be implemented in vhost_path, default /rabbitmq/vhost
-- name: resource
-  description: APIs to be implemented in resource_path, default /rabbitmq/resource
-- name: topic
-  description: APIs to be implemented in topic_path, default /rabbitmq/topic
+  - name: user
+    description: APIs to be implemented in user_path, default /rabbitmq/user
+  - name: vhost
+    description: APIs to be implemented in vhost_path, default /rabbitmq/vhost
+  - name: resource
+    description: APIs to be implemented in resource_path, default /rabbitmq/resource
+  - name: topic
+    description: APIs to be implemented in topic_path, default /rabbitmq/topic
+  
 paths:
   "/rabbitmq/user":
     get:
