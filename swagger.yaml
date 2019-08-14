@@ -1,0 +1,284 @@
+---
+swagger: "2.0"
+info:
+  title: RabbitMQ HTTP auth backend specifcition
+  description: This document provides a specification for the APIs listed in https://github.com/rabbitmq/rabbitmq-auth-backend-http
+  contact:
+    email: ckmichael8@gmail.com
+  version: 1.0.0
+produces:
+  - text/plain
+consumes:
+  - application/x-www-form-urlencoded
+tags:
+- name: user
+  description: APIs to be implemented in user_path, default /rabbitmq/user
+- name: vhost
+  description: APIs to be implemented in vhost_path, default /rabbitmq/vhost
+- name: resource
+  description: APIs to be implemented in resource_path, default /rabbitmq/resource
+- name: topic
+  description: APIs to be implemented in topic_path, default /rabbitmq/topic
+paths:
+  "/rabbitmq/user":
+    get:
+      tags:
+      - user
+      operationId: getUser
+      parameters:
+      - name: username
+        in: query
+        type: string
+        required: true
+      - name: password
+        in: query
+        type: string
+        required: true
+      responses:
+        '200':
+          description: allow | deny | deny [list of tags]
+          schema:
+            type: string
+    post:
+      tags:
+      - user
+      operationId: postUser
+      parameters:
+      - name: username
+        in: formData
+        type: string
+        required: true
+      - name: password
+        in: formData
+        type: string
+        required: true
+      responses:
+        '200':
+          description: allow | deny | deny [list of tags]
+          schema:
+            type: string
+  "/rabbitmq/vhost":
+    get:
+      tags:
+      - vhost
+      operationId: getVhost
+      parameters:
+      - name: username
+        in: query
+        required: true
+        type: string
+      - name: vhost
+        in: query
+        required: true
+        type: string
+      - name: ip
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
+    post:
+      tags:
+      - vhost
+      operationId: postVhost
+      parameters:
+      - name: username
+        in: formData
+        required: true
+        type: string
+      - name: vhost
+        in: formData
+        required: true
+        type: string
+      - name: ip
+        in: formData
+        required: true
+        type: string
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
+  "/rabbitmq/resource":
+    get:
+      tags:
+      - resource
+      operationId: getResource
+      parameters:
+      - name: username
+        in: query
+        required: true
+        type: string
+      - name: vhost
+        in: query
+        required: true
+        type: string
+      - name: resource
+        in: query
+        required: true
+        type: string
+        enum:
+          - exchange
+          - queue
+          - topic
+      - name: name
+        in: query
+        required: true
+        type: string
+      - name: permission
+        in: query
+        required: true
+        type: string
+        enum:
+          - configure
+          - write
+          - read
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
+    post:
+      tags:
+      - resource
+      operationId: postResource
+      parameters:
+      - name: username
+        in: formData
+        required: true
+        type: string
+      - name: vhost
+        in: formData
+        required: true
+        type: string
+      - name: resource
+        in: formData
+        required: true
+        type: string
+        enum:
+          - exchange
+          - queue
+          - topic
+      - name: name
+        in: formData
+        required: true
+        type: string
+      - name: permission
+        in: formData
+        required: true
+        type: string
+        enum:
+          - configure
+          - write
+          - read
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
+  "/rabbitmq/topic":
+    get:
+      tags:
+      - topic
+      operationId: getTopic
+      parameters:
+      - name: username
+        in: query
+        required: true
+        type: string
+      - name: vhost
+        in: query
+        required: true
+        type: string
+      - name: resource
+        in: query
+        required: true
+        type: string
+        enum:
+          - exchange
+          - queue
+          - topic
+      - name: name
+        in: query
+        required: true
+        type: string
+      - name: permission
+        in: query
+        required: true
+        type: string
+        enum:
+          - configure
+          - write
+          - read
+      - name: routing_key
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
+    post:
+      tags:
+      - resource
+      operationId: postTopic
+      parameters:
+      - name: username
+        in: formData
+        required: true
+        type: string
+      - name: vhost
+        in: formData
+        required: true
+        type: string
+      - name: resource
+        in: formData
+        required: true
+        type: string
+        enum:
+          - exchange
+          - queue
+          - topic
+      - name: name
+        in: formData
+        required: true
+        type: string
+      - name: permission
+        in: formData
+        required: true
+        type: string
+        enum:
+          - configure
+          - write
+          - read
+      - name: routing_key
+        in: formData
+        required: true
+        type: string
+      responses:
+        '200':
+          description: allow | deny
+          schema:
+            type: string
+            enum:
+              - allow
+              - deny
