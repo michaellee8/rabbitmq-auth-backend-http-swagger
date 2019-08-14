@@ -1,10 +1,10 @@
 ---
 swagger: "2.0"
 info:
-  title: RabbitMQ HTTP auth backend specifcition
-  description: This document provides a specification for the APIs listed in https://github.com/rabbitmq/rabbitmq-auth-backend-http
+  title: PG auth backend for RabbitMQ
+  description: The below set of APIs implement the specification as in https://github.com/rabbitmq/rabbitmq-auth-backend-http
   contact:
-    email: ckmichael8@gmail.com
+    email: michaeldv@pgpg.la
   version: 1.0.0
 produces:
   - text/plain
@@ -19,7 +19,8 @@ tags:
     description: APIs to be implemented in resource_path, default /rabbitmq/resource
   - name: topic
     description: APIs to be implemented in topic_path, default /rabbitmq/topic
-  
+  - name: token
+    description: APIs to be implemented to retrieve a username/password pair, currently for testing purpose only.
 paths:
   "/rabbitmq/user":
     get:
@@ -240,7 +241,7 @@ paths:
               - deny
     post:
       tags:
-      - resource
+      - topic
       operationId: postTopic
       parameters:
       - name: username
